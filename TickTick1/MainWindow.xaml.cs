@@ -28,7 +28,7 @@ namespace TickTick1
         private void one_Click(object sender, RoutedEventArgs e)
         {
             CardSet objcardSet = new CardSet();
-            //this.Visibility = Visibility.Hidden; //hiding the current window
+            
             objcardSet.Show();
         }
     }

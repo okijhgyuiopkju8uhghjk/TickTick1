@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data.SqlClient;
 
 namespace TickTick1
 {
@@ -29,6 +30,24 @@ namespace TickTick1
             CardSet objcardSet = new CardSet();
             //this.Visibility = Visibility.Hidden; //hiding the current window
             objcardSet.Show();
+        }
+
+        private void Save_Click(object sender, RoutedEventArgs e)
+        {
+            SqlConnection con = new SqlConnection("Data Source=DESKTOP-B1UH9E1\\SQLEXPRESS;Initial Catalog=MyCards;Integrated Security=True");
+            con.Open();
+            SqlCommand cmd = new SqlCommand("insert into Card_Table_1(setNo,context, question, answer, tag, q_fileLocation, a_fileLocation , c_fileLocation) values ('" + setNo_text.Text + "','" + context_text.Text + "','" + question_text.Text + "','" + answer_text.Text + "','" + tag_text.Text + "','" + fileLocation_q_text.Text + "','" + fileLocation_a_text.Text + "','" + fileLocation_c_text.Text +"')",con);
+            
+            int i = cmd.ExecuteNonQuery();
+            if(i != 0) 
+            {
+                MessageBox.Show("Saved");
+            }
+            else
+            {
+                MessageBox.Show("Error");
+            }
+            con.Close();
         }
     }
 }

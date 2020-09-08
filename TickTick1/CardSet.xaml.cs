@@ -36,5 +36,12 @@ namespace TickTick1
             AddCard objaddcard = new AddCard();
             objaddcard.Show();
         }
+
+        private void study_Click(object sender, RoutedEventArgs e)
+        {
+            StudyWindow objstudyWindow = new StudyWindow();
+            objstudyWindow.Show();
+            
+        }
     }
 }
