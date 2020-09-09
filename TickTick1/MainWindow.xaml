@@ -6,27 +6,29 @@
         xmlns:local="clr-namespace:TickTick1"
         xmlns:Properties="clr-namespace:TickTick1.Properties" x:Class="TickTick1.MainWindow"
         mc:Ignorable="d"
-        Title="Box" Height="1060" Width="400">
+        Title="Box" Height="250" Width="450">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="496*"/>
-            <RowDefinition Height="533*"/>
+            <RowDefinition Height="161*"/>
+            <RowDefinition Height="10*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="11*"/>
-            <ColumnDefinition Width="45*"/>
+            <ColumnDefinition Width="81*"/>
+            <ColumnDefinition Width="362*"/>
         </Grid.ColumnDefinitions>
 
-        <Button x:Name="one" Content="1" HorizontalAlignment="Left" Margin="30,50,0,0" VerticalAlignment="Top" Width="40" Height="40" Click="one_Click" />
-        <Button x:Name="two" Content="2" HorizontalAlignment="Right" Margin="0,50,263,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1"/>
-        <Button x:Name="three" Content="3" HorizontalAlignment="Left" Margin="73,50,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1"/>
-        <Button x:Name="four" Content="4" HorizontalAlignment="Left" Margin="137,50,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1"/>
-        <Button x:Name="five" Content="5" HorizontalAlignment="Left" Margin="205,50,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1"/>
+        <Button x:Name="one" Content="1" HorizontalAlignment="Left" Margin="13.2,50,0,0" VerticalAlignment="Top" Width="40" Height="40" Click="one_Click" Grid.Column="1" />
+        <Button x:Name="two" Content="2" HorizontalAlignment="Right" Margin="0,50,242.2,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1"/>
+        <Button x:Name="three" Content="3" HorizontalAlignment="Left" Margin="137.2,50,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1"/>
+        <Button x:Name="four" Content="4" HorizontalAlignment="Left" Margin="205.2,50,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1"/>
+        <Button x:Name="five" Content="5" HorizontalAlignment="Left" Margin="266.2,50,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1"/>
         <Button x:Name="six" Content="6" HorizontalAlignment="Left" Margin="30,115,0,0" VerticalAlignment="Top" Width="40" Height="40"/>
-        <Button x:Name="seven" Content="7" HorizontalAlignment="Left" Margin="12,115,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1"/>
-        <Button x:Name="clarify" Content="Clarify" HorizontalAlignment="Left" Margin="73,115,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1" RenderTransformOrigin="0.875,-2.5"/>
-        <Button x:Name="_break" Content="Break" HorizontalAlignment="Left" Margin="137,115,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1"/>
-        <Button x:Name="tag" Content="Tag" HorizontalAlignment="Left" Margin="205,115,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1"/>
+        <Button x:Name="seven" Content="7" HorizontalAlignment="Left" Margin="13.2,115,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1"/>
+        <Button x:Name="clarify" Content="Clarify" HorizontalAlignment="Left" Margin="137.2,115,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1" RenderTransformOrigin="0.875,-2.5"/>
+        <Button x:Name="_break" Content="Break" HorizontalAlignment="Left" Margin="73.2,115,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1"/>
+        <Button x:Name="tag" Content="Tag" HorizontalAlignment="Left" Margin="205.2,115,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1"/>
+        <Button x:Name="add" Content="Add" HorizontalAlignment="Left" Margin="30,50,0,0" VerticalAlignment="Top" Width="40" Height="40"/>
+        <Button x:Name="viewAll" Content="View All" HorizontalAlignment="Left" Margin="266.2,115,0,0" VerticalAlignment="Top" Width="59" Height="40" Grid.Column="1"/>
 
     </Grid>
 </Window>
