@@ -24,19 +24,6 @@ namespace TickTick1
             InitializeComponent();
         }
 
-        private void home_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow objmainwindow = new MainWindow();
-            //this.Visibility = Visibility.Hidden; //hiding the current window
-            objmainwindow.Show();
-        }
-
-        private void add_Click(object sender, RoutedEventArgs e)
-        {
-            AddCard objaddcard = new AddCard();
-            objaddcard.Show();
-        }
-
         private void study_Click(object sender, RoutedEventArgs e)
         {
             StudyWindow objstudyWindow = new StudyWindow();

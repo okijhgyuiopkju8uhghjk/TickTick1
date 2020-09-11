@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:TickTick1"
         xmlns:Properties="clr-namespace:TickTick1.Properties" x:Class="TickTick1.MainWindow"
         mc:Ignorable="d"
-        Title="Box" Height="250" Width="450">
+        Title="Home" Height="250" Width="450">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="161*"/>
@@ -27,7 +27,7 @@
         <Button x:Name="clarify" Content="Clarify" HorizontalAlignment="Left" Margin="137.2,115,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1" RenderTransformOrigin="0.875,-2.5"/>
         <Button x:Name="_break" Content="Break" HorizontalAlignment="Left" Margin="73.2,115,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1"/>
         <Button x:Name="tag" Content="Tag" HorizontalAlignment="Left" Margin="205.2,115,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1"/>
-        <Button x:Name="add" Content="Add" HorizontalAlignment="Left" Margin="30,50,0,0" VerticalAlignment="Top" Width="40" Height="40"/>
+        <Button x:Name="add" Content="Add" HorizontalAlignment="Left" Margin="30,50,0,0" VerticalAlignment="Top" Width="40" Height="40" Click="add_Click"/>
         <Button x:Name="viewAll" Content="View All" HorizontalAlignment="Left" Margin="266.2,115,0,0" VerticalAlignment="Top" Width="59" Height="40" Grid.Column="1"/>
 
     </Grid>

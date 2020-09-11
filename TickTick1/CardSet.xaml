@@ -8,10 +8,8 @@
         Title="CardSet" Height="300" Width="300">
     <Grid>
         <Label Content="Card Set 1" HorizontalAlignment="Left" Margin="144,41,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="add" Content="Add" HorizontalAlignment="Left" Margin="144,93,0,0" VerticalAlignment="Top" Width="75" Click="add_Click"/>
         <Button x:Name="study" Content="Study" HorizontalAlignment="Left" Margin="144,141,0,0" VerticalAlignment="Top" Width="75" Click="study_Click"/>
         <Button x:Name="viewCards" Content="View cards" HorizontalAlignment="Left" Margin="144,184,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="home" Content="Home" HorizontalAlignment="Left" Margin="30,141,0,0" VerticalAlignment="Top" Width="75" Click="home_Click"/>
 
     </Grid>
 </Window>

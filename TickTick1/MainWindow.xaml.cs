@@ -31,5 +31,11 @@ namespace TickTick1
             
             objcardSet.Show();
         }
+
+        private void add_Click(object sender, RoutedEventArgs e)
+        {
+            AddCard objaddcard = new AddCard();
+            objaddcard.Show();
+        }
     }
 }
