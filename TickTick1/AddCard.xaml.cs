@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.SqlClient;
+using System.IO;
 
 namespace TickTick1
 {
@@ -25,23 +26,34 @@ namespace TickTick1
             InitializeComponent();
         }
 
-        private void Back_Click(object sender, RoutedEventArgs e)
-        {
-            CardSet objcardSet = new CardSet();
-            //this.Visibility = Visibility.Hidden; //hiding the current window
-            objcardSet.Show();
-        }
+       
 
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            SqlConnection con = new SqlConnection("Data Source=DESKTOP-B1UH9E1\\SQLEXPRESS;Initial Catalog=MyCards;Integrated Security=True");
+            //storing the file on desktop in "path"
+            string path = @"C:\Users\Srinivas\Desktop\contextInk.isf";
+            // Delete the file if it exists.
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+            //Create the file.
+            
+            using (FileStream fs = File.Create(path))
+            {
+                contextInkCanvas.Strokes.Save(fs);
+            }
+            
+
+            SqlConnection con = new SqlConnection("Server=tcp:srinivasa.database.windows.net,1433;Initial Catalog=FCdb;Persist Security Info=False;User ID=Srinivas;Password=Caustic6;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            
             con.Open();
-            SqlCommand cmd = new SqlCommand("insert into Card_Table_1(setNo,context, question, answer, tag, q_fileLocation, a_fileLocation , c_fileLocation) values ('" + setNo_text.Text + "','" + context_text.Text + "','" + question_text.Text + "','" + answer_text.Text + "','" + tag_text.Text + "','" + fileLocation_q_text.Text + "','" + fileLocation_a_text.Text + "','" + fileLocation_c_text.Text +"')",con);
+            SqlCommand cmd = new SqlCommand("insert into FlashCards(setNo,context, question, answer, tag, q_fileLocation, a_fileLocation , c_fileLocation) values ('" + setNo_text.Text + "','" + context_text.Text + "','" + question_text.Text + "','" + answer_text.Text + "','" + tag_text.Text + "','" + fileLocation_q_text.Text + "','" + fileLocation_a_text.Text + "','" + fileLocation_c_text.Text +"')",con);
             
             int i = cmd.ExecuteNonQuery();
             if(i != 0) 
             {
-                MessageBox.Show("Saved");
+                MessageBox.Show("Saved to dbTable");
             }
             else
             {
