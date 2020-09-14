@@ -37,5 +37,10 @@ namespace TickTick1
             AddCard objaddcard = new AddCard();
             objaddcard.Show();
         }
+
+        private void cloud_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
