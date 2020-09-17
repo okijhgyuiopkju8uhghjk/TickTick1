@@ -18,17 +18,14 @@
         </Grid.ColumnDefinitions>
 
         <Button x:Name="one" Content="1" HorizontalAlignment="Left" Margin="13.2,50,0,0" VerticalAlignment="Top" Width="40" Height="40" Click="one_Click" Grid.Column="1" />
-        <Button x:Name="two" Content="2" HorizontalAlignment="Right" Margin="0,50,242.2,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1"/>
-        <Button x:Name="three" Content="3" HorizontalAlignment="Left" Margin="137.2,50,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1"/>
-        <Button x:Name="four" Content="4" HorizontalAlignment="Left" Margin="205.2,50,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1"/>
-        <Button x:Name="five" Content="5" HorizontalAlignment="Left" Margin="266.2,50,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1"/>
-        <Button x:Name="six" Content="6" HorizontalAlignment="Left" Margin="30,115,0,0" VerticalAlignment="Top" Width="40" Height="40"/>
-        <Button x:Name="seven" Content="7" HorizontalAlignment="Left" Margin="13.2,115,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1"/>
-        <Button x:Name="clarify" Content="Clarify" HorizontalAlignment="Left" Margin="137.2,115,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1" RenderTransformOrigin="0.875,-2.5"/>
-        <Button x:Name="_break" Content="Break" HorizontalAlignment="Left" Margin="73.2,115,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1"/>
-        <Button x:Name="tag" Content="Tag" HorizontalAlignment="Left" Margin="205.2,115,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1"/>
+        <Button x:Name="two" Content="2" HorizontalAlignment="Right" Margin="0,50,242.2,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1" Click="two_Click"/>
+        <Button x:Name="three" Content="3" HorizontalAlignment="Left" Margin="137.2,50,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1" Click="three_Click"/>
+        <Button x:Name="four" Content="4" HorizontalAlignment="Left" Margin="205.2,50,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1" Click="four_Click"/>
+        <Button x:Name="five" Content="5" HorizontalAlignment="Left" Margin="266.2,50,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1" Click="five_Click"/>
+        <Button x:Name="six" Content="6" HorizontalAlignment="Left" Margin="30,115,0,0" VerticalAlignment="Top" Width="40" Height="40" Click="six_Click"/>
+        <Button x:Name="seven" Content="7" HorizontalAlignment="Left" Margin="13.2,115,0,0" VerticalAlignment="Top" Width="40" Height="40" Grid.Column="1" Click="seven_Click"/>
         <Button x:Name="add" Content="Add" HorizontalAlignment="Left" Margin="30,50,0,0" VerticalAlignment="Top" Width="40" Height="40" Click="add_Click"/>
-        <Button x:Name="viewAll" Content="View All" HorizontalAlignment="Left" Margin="266.2,115,0,0" VerticalAlignment="Top" Width="59" Height="40" Grid.Column="1"/>
+        <Button x:Name="viewAll" Content="View All" HorizontalAlignment="Left" Margin="80.2,115,0,0" VerticalAlignment="Top" Width="59" Height="40" Grid.Column="1"/>
 
     </Grid>
 </Window>
