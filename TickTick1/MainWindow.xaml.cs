@@ -37,6 +37,7 @@ namespace TickTick1
 
         private void add_Click(object sender, RoutedEventArgs e)
         {
+            GlobalVariables.SetNo = "0";
             CardView objcardview = new CardView();
             objcardview.Show();
         }
@@ -87,6 +88,14 @@ namespace TickTick1
             GlobalVariables.SetNo = "7";
             CardView objcardview = new CardView();
             objcardview.Show();
+        }
+
+        private void viewAll_Click(object sender, RoutedEventArgs e)
+        {
+            GlobalVariables.SetNo = "8";
+            ViewAll objviewAll = new ViewAll();
+            objviewAll.Show();
+
         }
     }
 }

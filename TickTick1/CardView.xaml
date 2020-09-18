@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TickTick1"
         mc:Ignorable="d"
-        Title="CardView" Height="550" Width="1100">
+        Title="CardView" Height="560" Width="1100">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="469">
@@ -23,7 +23,12 @@
             <InkCanvas x:Name="InkCanvas_q" Background="#FFCCCB"  MaxWidth="{Binding ActualWidth, ElementName=LayoutRoot}" MaxHeight="{Binding ActualHeight, ElementName=LayoutRoot}" Canvas.Left="377" Canvas.Top="98" Height="398"/>
             <InkCanvas x:Name="InkCanvas_c" Background="#FFFFE0"  MaxWidth="{Binding ActualWidth, ElementName=LayoutRoot}" MaxHeight="{Binding ActualHeight, ElementName=LayoutRoot}" Canvas.Left="19" Height="398" Canvas.Top="101"/>
             <InkCanvas x:Name="InkCanvas_a" Background="#B7FFBF"  MaxWidth="{Binding ActualWidth, ElementName=LayoutRoot}" MaxHeight="{Binding ActualHeight, ElementName=LayoutRoot}" Canvas.Left="732" Height="398" Canvas.Top="98"/>
-            <Button x:Name="Next" Content="Next" Canvas.Left="814" Canvas.Top="10" Width="76" Click="Next_Click"/>
+            <Button x:Name="AddNext" Content="Add Next" Canvas.Left="814" Canvas.Top="10" Width="76" Click="AddNext_Click"/>
+            <Button x:Name="ShowAnswer" Content="Show Answer" Canvas.Left="676" Canvas.Top="63" Width="74" Click="ShowAnswer_Click"/>
+            <Button x:Name="ShowNext" Content="Show Next" Canvas.Left="815" Canvas.Top="63" Width="75"/>
+            <Button x:Name="Promote" Content="Promote" Canvas.Left="968" Canvas.Top="10" Width="75" Click="Promote_Click"/>
+            <Button x:Name="Demote" Content="Demote" Canvas.Left="968" Canvas.Top="63" Width="75" Click="Demote_Click"/>
+            <Label x:Name="List" Content="List" Canvas.Left="31" Canvas.Top="499" Width="1051"/>
         </Canvas>
         <Label Grid.Row="0" Grid.Column="0" x:Name="Card" Content="Card " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.58,0.038"/>
         <Label Grid.Row="0" Grid.Column="0" x:Name="Set_No" Content="Set No 1" HorizontalAlignment="Left" Margin="376,10,0,0" VerticalAlignment="Top"/>
