@@ -14,5 +14,11 @@ namespace TickTick1
             get { return setNo; }
             set { setNo = value; }
         }
+        private static String idToEdit = "";
+        public static String IdToEdit
+        {
+            get { return idToEdit; }
+            set { idToEdit = value; }
+        }
     }
 }

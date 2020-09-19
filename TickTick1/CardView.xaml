@@ -29,6 +29,7 @@
             <Button x:Name="Promote" Content="Promote" Canvas.Left="968" Canvas.Top="10" Width="75" Click="Promote_Click"/>
             <Button x:Name="Demote" Content="Demote" Canvas.Left="968" Canvas.Top="63" Width="75" Click="Demote_Click"/>
             <Label x:Name="List" Content="List" Canvas.Left="31" Canvas.Top="499" Width="1051"/>
+            <Button x:Name="Erase_Bt" Content="Eraser" Canvas.Left="450" Canvas.Top="63" Width="75" Click="Erase_Bt_Click"/>
         </Canvas>
         <Label Grid.Row="0" Grid.Column="0" x:Name="Card" Content="Card " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.58,0.038"/>
         <Label Grid.Row="0" Grid.Column="0" x:Name="Set_No" Content="Set No 1" HorizontalAlignment="Left" Margin="376,10,0,0" VerticalAlignment="Top"/>

@@ -76,8 +76,24 @@ namespace TickTick1
 
                 }
             }
-            else
+            else if(Int32.Parse(GlobalVariables.SetNo) == 9)
             {
+                //for edit mode
+                //Show hide relavent buttons
+                ShowAnswer.Visibility = Visibility.Hidden;
+                ShowNext.Visibility = Visibility.Hidden;
+
+                Promote.Visibility = Visibility.Hidden;
+                Demote.Visibility = Visibility.Hidden;
+
+                Save.Visibility = Visibility.Visible;
+                AddNext.Visibility = Visibility.Hidden;
+
+                NewCardCardView(Int32.Parse(GlobalVariables.IdToEdit));
+
+
+            }
+           else{
                 //for study mode
 
                 //Show hide relavent buttons
@@ -111,14 +127,18 @@ namespace TickTick1
                 //------------
                 NewCardCardView(randomCardid);
 
-                //remove that id from the list when next is selected and repat the entire process
-
-                // there should be a lable showing the number of cards remaining
             }
         }
         private void Save_Click(object sender, RoutedEventArgs e)
         {
-            SaveWindow();
+            if (Int32.Parse(GlobalVariables.SetNo) == 0) 
+            {
+                SaveWindow(Int32.Parse(CardID.Content.ToString()) + 1);
+            }
+            else {
+                SaveWindow(Int32.Parse(CardID.Content.ToString()));
+
+            }
 
         }
         void CardView_Closing(object sender, EventArgs e)
@@ -128,7 +148,15 @@ namespace TickTick1
                 //Put your close code here
                 if (MessageBox.Show("should this card be saved?", "before you leave", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    SaveWindow();
+                    if (Int32.Parse(GlobalVariables.SetNo) == 0)
+                    {
+                        SaveWindow(Int32.Parse(CardID.Content.ToString()) + 1);
+                    }
+                    else
+                    {
+                        SaveWindow(Int32.Parse(CardID.Content.ToString()));
+
+                    }
                     con.Close();
                     MessageBox.Show("saved and conection closed");
 
@@ -141,11 +169,11 @@ namespace TickTick1
                 }
             }
         }
-        private void SaveWindow()
+        private void SaveWindow(int id)
         {
 
             //creating uniq path for the 3 isf files
-            string id_string = (cardIdNo + 1).ToString();
+            string id_string = (id).ToString();
             string cpath = String.Concat(@"Z:\", id_string, @"_c_Ink.isf");
             string qpath = String.Concat(@"Z:\", id_string, @"_q_Ink.isf");
             string apath = String.Concat(@"Z:\", id_string, @"_a_Ink.isf");
@@ -157,14 +185,23 @@ namespace TickTick1
 
             //Create the file.
 
-            using (FileStream fs = File.Create(cpath)) { InkCanvas_c.Strokes.Save(fs); }
-            using (FileStream fs = File.Create(qpath)) { InkCanvas_q.Strokes.Save(fs); }
-            using (FileStream fs = File.Create(apath)) { InkCanvas_a.Strokes.Save(fs); }
+            using (FileStream fs1 = File.Create(cpath)) { InkCanvas_c.Strokes.Save(fs1); }
+            using (FileStream fs2 = File.Create(qpath)) { InkCanvas_q.Strokes.Save(fs2); }
+            using (FileStream fs3 = File.Create(apath)) { InkCanvas_a.Strokes.Save(fs3); }
 
 
-
-            SqlCommand cmd = new SqlCommand("insert into FlashCards(setNo,context, question, answer, tag, q_fileLocation, a_fileLocation , c_fileLocation) values ('" + 1 + "','" + context_text.Text + "','" + question_text.Text + "','" + answer_text.Text + "','" + tag_text.Text + "','" + qpath + "','" + apath + "','" + cpath + "')", con);
-
+            if (con != null && con.State == ConnectionState.Closed)
+            {
+                con.Open();
+            }
+            if (Int32.Parse(GlobalVariables.SetNo) == 0)
+            {
+                 cmd = new SqlCommand("insert into FlashCards(setNo,context, question, answer, tag, q_fileLocation, a_fileLocation , c_fileLocation) values ('" + 1 + "','" + context_text.Text + "','" + question_text.Text + "','" + answer_text.Text + "','" + tag_text.Text + "','" + qpath + "','" + apath + "','" + cpath + "')", con);
+            }
+            else
+            {
+                cmd = new SqlCommand("update FlashCards set question ='" + question_text.Text + "', answer ='" + answer_text.Text + "',context ='" + context_text.Text + "',tag ='" + tag_text.Text + "',q_fileLocation ='" + qpath + "',c_fileLocation='" + cpath + "',a_fileLocation='" + apath + "' where ID = " + GlobalVariables.IdToEdit + "", con);
+            }
 
             int i = cmd.ExecuteNonQuery();
             if (i != 0)
@@ -304,12 +341,17 @@ namespace TickTick1
                 Set_No.Content = $"Set No:{dr["setNo"]}";
                 context_text.Text = dr["context"].ToString();
                 question_text.Text = dr["question"].ToString();
-                aText = dr["answer"].ToString();
+                if (Int32.Parse(GlobalVariables.SetNo) == 0)
+                {
+                    aText = dr["answer"].ToString(); 
+                } else {
+                    answer_text.Text = dr["answer"].ToString();
+                }
 
                 //display ink on c and q 
                 qpath = dr["q_fileLocation"].ToString();
-                cpath = dr["q_fileLocation"].ToString();
-                apath = dr["q_fileLocation"].ToString();
+                cpath = dr["c_fileLocation"].ToString();
+                apath = dr["a_fileLocation"].ToString();
 
                 FileStream fs = new FileStream(cpath, FileMode.Open, (FileAccess)FileShare.ReadWrite);
                 InkCanvas_c.Strokes = new StrokeCollection(fs);
@@ -317,6 +359,14 @@ namespace TickTick1
                 FileStream fs2 = new FileStream(qpath, FileMode.Open, (FileAccess)FileShare.ReadWrite);
                 InkCanvas_q.Strokes = new StrokeCollection(fs2);
                 fs2.Close();
+                if (Int32.Parse(GlobalVariables.SetNo) != 0)
+                {
+                    FileStream fs3 = new FileStream(apath, FileMode.Open, (FileAccess)FileShare.ReadWrite);
+                    InkCanvas_a.Strokes = new StrokeCollection(fs3);
+                    fs2.Close();
+                }
+                
+
             }
             dr.Close();
             con.Close();
@@ -325,6 +375,9 @@ namespace TickTick1
 
         }
 
-        
+        private void Erase_Bt_Click(object sender, RoutedEventArgs e)
+        {
+            InkCanvas_q.EditingMode = InkCanvas_q.EditingMode == InkCanvasEditingMode.Ink ? InkCanvasEditingMode.EraseByPoint : InkCanvasEditingMode.Ink;
+        }
     }
 }
