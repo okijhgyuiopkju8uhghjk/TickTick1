@@ -23,7 +23,7 @@ namespace TickTick1
     /// </summary>
     public partial class CardView : Window
     {
-        public static int cardIdNo;
+        public static int cardIdNo = 0;//variable used to add a card to db
         SqlCommand cmd;
         SqlConnection con;
 
@@ -37,8 +37,9 @@ namespace TickTick1
         public String qpath;
         public int randomCardid;
         public List<int> list;
+        public String savedOrNot = "notSved";
 
-        //savewindow(),newcardcardview(),clearcardview()
+        //save_click,cardView_closing,savewindow(),AddNext_click,showAnswer_click,prompte_click,demote_click,clearcardviw(),newcardcardview(),erase_Bt_click()
 
         public CardView()
         {
@@ -73,8 +74,10 @@ namespace TickTick1
                     String cardId = String.Concat((cardIdNo + 1).ToString());
 
                     CardID.Content = cardId;
+                    MessageBox.Show(cardId, "card id going to be saved is");
 
                 }
+                dr.Close();
             }
             else if(Int32.Parse(GlobalVariables.SetNo) == 9)
             {
@@ -132,10 +135,11 @@ namespace TickTick1
         private void Save_Click(object sender, RoutedEventArgs e)
         {
             if (Int32.Parse(GlobalVariables.SetNo) == 0) 
-            {
-                SaveWindow(Int32.Parse(CardID.Content.ToString()) + 1);
+            {    
+                    SaveWindow(cardIdNo + 1);
             }
-            else {
+            else 
+            {
                 SaveWindow(Int32.Parse(CardID.Content.ToString()));
 
             }
@@ -143,31 +147,26 @@ namespace TickTick1
         }
         void CardView_Closing(object sender, EventArgs e)
         {
-            if (Int32.Parse(GlobalVariables.SetNo) == 0)
+            if (Int32.Parse(GlobalVariables.SetNo) == 0 & savedOrNot == "notSved")
             {
                 //Put your close code here
                 if (MessageBox.Show("should this card be saved?", "before you leave", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
                     if (Int32.Parse(GlobalVariables.SetNo) == 0)
                     {
-                        SaveWindow(Int32.Parse(CardID.Content.ToString()) + 1);
+                        SaveWindow(cardIdNo + 1);
+                        MessageBox.Show("saved and conection closed");
                     }
-                    else
-                    {
-                        SaveWindow(Int32.Parse(CardID.Content.ToString()));
-
-                    }
-                    con.Close();
-                    MessageBox.Show("saved and conection closed");
 
                 }
                 else
                 {
-                    con.Close();
+                   
                     MessageBox.Show("not saved and connection closed");
 
                 }
             }
+            con.Close();
         }
         private void SaveWindow(int id)
         {
@@ -207,6 +206,8 @@ namespace TickTick1
             if (i != 0)
             {
                 MessageBox.Show("Saved to dbTable");
+                savedOrNot = "Sved";
+                cardIdNo = 0;
             }
             else
             {
@@ -216,9 +217,25 @@ namespace TickTick1
         }
         private void AddNext_Click(object sender, RoutedEventArgs e)
         {
+            //first save the present card if not saved
+            if (savedOrNot == "notSved")
+            {
+
+                if (MessageBox.Show("should this card be saved?", "before adding next card", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                {
+
+                    SaveWindow(cardIdNo + 1);
+                    MessageBox.Show("saved");
+
+                }
+            }
+
+            //opening new card
+
             String sqlSelectQuery = "SELECT [id] FROM [dbo].[FlashCards] WHERE id=(SELECT max(id) FROM [dbo].[FlashCards])";
             cmd = new SqlCommand(sqlSelectQuery, con);
-            SqlDataReader dr = cmd.ExecuteReader();
+
+             SqlDataReader dr = cmd.ExecuteReader();
 
             if (dr.Read())
             {
@@ -230,12 +247,15 @@ namespace TickTick1
                 CardID.Content = cardId;
 
             }
+            savedOrNot = "notSved";
+            dr.Close();
 
         }
 
         private void ShowAnswer_Click(object sender, RoutedEventArgs e)
         {
             // on clicking answer button show answer
+        
             answer_text.Text = aText;
             FileStream fs = new FileStream(apath, FileMode.Open, (FileAccess)FileShare.ReadWrite);
             InkCanvas_a.Strokes = new StrokeCollection(fs);
@@ -244,11 +264,19 @@ namespace TickTick1
 
         private void Promote_Click(object sender, RoutedEventArgs e)
         {
+            if (con != null && con.State == ConnectionState.Closed)
+            {
+                con.Open();
+            }
             //increase set no by 1 if less than 7
             if (Int32.Parse(GlobalVariables.SetNo) < 7)
             {
-                String sqlUpdateQuery = $"UPDATE FlashCards SET setNo = {(Int32.Parse(GlobalVariables.SetNo)) + 1}, tag = '{tag_text.Text}' WHERE id = {randomCardid};";
-                cmd = new SqlCommand(sqlUpdateQuery, con);
+
+          
+                cmd = new SqlCommand("UPDATE FlashCards SET setNo = "+ ((Int32.Parse(GlobalVariables.SetNo)) + 1) +", tag = '"+ tag_text.Text +"'  WHERE id = "+ randomCardid +";", con);
+                cmd.ExecuteNonQuery();
+                
+               
                 
             }
             ClearCardView();
@@ -271,11 +299,16 @@ namespace TickTick1
         }
         private void Demote_Click(object sender, RoutedEventArgs e)
         {
+            if (con != null && con.State == ConnectionState.Closed)
+            {
+                con.Open();
+            }
             //decrease set no by 1 if more than 1
             if (Int32.Parse(GlobalVariables.SetNo) > 1)
             {
-                String sqlUpdateQuery = $"UPDATE FlashCards SET setNo = {(Int32.Parse(GlobalVariables.SetNo)) - 1}, tag = '{tag_text.Text}' WHERE id = {randomCardid};";
-                cmd = new SqlCommand(sqlUpdateQuery, con);
+
+                cmd = new SqlCommand("UPDATE FlashCards SET setNo = " + ((Int32.Parse(GlobalVariables.SetNo)) - 1) + ", tag = '" + tag_text.Text + "'  WHERE id = " + randomCardid + ";", con);
+                cmd.ExecuteNonQuery();
 
             }
 
@@ -345,7 +378,8 @@ namespace TickTick1
                 {
                     aText = dr["answer"].ToString(); 
                 } else {
-                    answer_text.Text = dr["answer"].ToString();
+                    answer_text.Text = "";
+                    aText = dr["answer"].ToString();
                 }
 
                 //display ink on c and q 
@@ -363,7 +397,7 @@ namespace TickTick1
                 {
                     FileStream fs3 = new FileStream(apath, FileMode.Open, (FileAccess)FileShare.ReadWrite);
                     InkCanvas_a.Strokes = new StrokeCollection(fs3);
-                    fs2.Close();
+                    fs3.Close();
                 }
                 
 

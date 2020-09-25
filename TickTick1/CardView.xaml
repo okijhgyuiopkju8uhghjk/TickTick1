@@ -31,7 +31,7 @@
             <Label x:Name="List" Content="List" Canvas.Left="31" Canvas.Top="499" Width="1051"/>
             <Button x:Name="Erase_Bt" Content="Eraser" Canvas.Left="450" Canvas.Top="63" Width="75" Click="Erase_Bt_Click"/>
         </Canvas>
-        <Label Grid.Row="0" Grid.Column="0" x:Name="Card" Content="Card " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.58,0.038"/>
+        <Label Grid.Row="0" Grid.Column="0" x:Name="Card" Content="Card id: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.58,0.038"/>
         <Label Grid.Row="0" Grid.Column="0" x:Name="Set_No" Content="Set No 1" HorizontalAlignment="Left" Margin="376,10,0,0" VerticalAlignment="Top"/>
         <Label Grid.Row="0" Grid.Column="0" x:Name="Lablke_Tag" Content="Tag" HorizontalAlignment="Left" Margin="12,32,0,0" VerticalAlignment="Top" Height="28" Width="29"/>
         <TextBox Grid.Row="0" Grid.Column="0" x:Name="question_text" Background="Transparent"  HorizontalAlignment="Left" Height="41" Margin="376,99,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="352"/>
@@ -39,7 +39,7 @@
         <TextBox Grid.Row="0" Grid.Column="0" x:Name="tag_text" Background="Transparent"  HorizontalAlignment="Left" Height="27" Margin="43,32,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="529"/>
         <TextBox Grid.Row="0" Grid.Column="0" x:Name="context_text" HorizontalAlignment="Left" Height="41" Background="Transparent" Margin="20,101,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="352" RenderTransformOrigin="0.717,0.478"/>
         <Button Grid.Row="0" Grid.Column="0" x:Name="Save" Content="Save" HorizontalAlignment="Left" Margin="671,10,0,0" VerticalAlignment="Top" Width="75" Click="Save_Click"/>
-        <Label Grid.Row="0" Grid.Column="0" x:Name="CardID" Content="ID" HorizontalAlignment="Left" Margin="48,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.58,0.038"/>
+        <Label Grid.Row="0" Grid.Column="0" x:Name="CardID" Content="1" HorizontalAlignment="Left" Margin="55,10,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.58,0.038"/>
 
 
     </Grid>
