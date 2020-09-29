@@ -79,7 +79,7 @@ namespace TickTick1
                 }
                 dr.Close();
             }
-            else if(Int32.Parse(GlobalVariables.SetNo) == 9)
+            else if(Int32.Parse(GlobalVariables.SetNo) == 8)
             {
                 //for edit mode
                 //Show hide relavent buttons
@@ -352,8 +352,6 @@ namespace TickTick1
         }
         public void NewCardCardView(int id)
         {
-            //------
-
             //ask the database for everything about that id
             if (con != null && con.State == ConnectionState.Closed)
             {
@@ -376,8 +374,14 @@ namespace TickTick1
                 question_text.Text = dr["question"].ToString();
                 if (Int32.Parse(GlobalVariables.SetNo) == 0)
                 {
-                    aText = dr["answer"].ToString(); 
-                } else {
+                    aText = dr["answer"].ToString();
+                } else if(Int32.Parse(GlobalVariables.SetNo) == 8)
+                {
+                    
+                    answer_text.Text = dr["answer"].ToString();
+
+                } else
+                {
                     answer_text.Text = "";
                     aText = dr["answer"].ToString();
                 }

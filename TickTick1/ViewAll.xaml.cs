@@ -72,7 +72,7 @@ namespace TickTick1
         private void Opentoedit_Click(object sender, RoutedEventArgs e)
         {
             GlobalVariables.IdToEdit = idToEdit.Text;
-            GlobalVariables.SetNo = "9";
+            GlobalVariables.SetNo = "8";
 
             CardView cardView = new CardView();
             cardView.Show();
