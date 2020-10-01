@@ -64,6 +64,10 @@ namespace TickTick1
                 Save.Visibility = Visibility.Visible;
                 AddNext.Visibility = Visibility.Visible;
 
+                Delete_btn.Visibility = Visibility.Hidden;
+                Erase_Bt.Visibility = Visibility.Visible;
+
+
                 String sqlSelectQuery = "SELECT [id] FROM [dbo].[FlashCards] WHERE id=(SELECT max(id) FROM [dbo].[FlashCards])";
                 cmd = new SqlCommand(sqlSelectQuery, con);
                 SqlDataReader dr = cmd.ExecuteReader();
@@ -92,6 +96,9 @@ namespace TickTick1
                 Save.Visibility = Visibility.Visible;
                 AddNext.Visibility = Visibility.Hidden;
 
+                Delete_btn.Visibility = Visibility.Visible;
+                Erase_Bt.Visibility = Visibility.Visible;
+
                 NewCardCardView(Int32.Parse(GlobalVariables.IdToEdit));
 
 
@@ -102,12 +109,16 @@ namespace TickTick1
                 //Show hide relavent buttons
                 ShowAnswer.Visibility = Visibility.Visible;
                 ShowNext.Visibility = Visibility.Hidden;
+                ShowAnswer.Focus();
 
                 Promote.Visibility = Visibility.Visible;
                 Demote.Visibility = Visibility.Visible;
 
                 Save.Visibility = Visibility.Hidden;
                 AddNext.Visibility = Visibility.Hidden;
+
+                Delete_btn.Visibility = Visibility.Hidden;
+                Erase_Bt.Visibility = Visibility.Hidden;
 
                 //ask db to give all id no with set no what ever it is that is ckicked
                 sqlSelectQuery = "SELECT[id] FROM[dbo].[FlashCards] WHERE[setNo] = " + GlobalVariables.SetNo;
@@ -260,6 +271,7 @@ namespace TickTick1
             FileStream fs = new FileStream(apath, FileMode.Open, (FileAccess)FileShare.ReadWrite);
             InkCanvas_a.Strokes = new StrokeCollection(fs);
             fs.Close();
+            Promote.Focus();
         }
 
         private void Promote_Click(object sender, RoutedEventArgs e)
@@ -297,6 +309,7 @@ namespace TickTick1
             List.Content = string.Join(",", list.ToArray());
 
         }
+
         private void Demote_Click(object sender, RoutedEventArgs e)
         {
             if (con != null && con.State == ConnectionState.Closed)
@@ -416,6 +429,39 @@ namespace TickTick1
         private void Erase_Bt_Click(object sender, RoutedEventArgs e)
         {
             InkCanvas_q.EditingMode = InkCanvas_q.EditingMode == InkCanvasEditingMode.Ink ? InkCanvasEditingMode.EraseByPoint : InkCanvasEditingMode.Ink;
+            InkCanvas_a.EditingMode = InkCanvas_a.EditingMode == InkCanvasEditingMode.Ink ? InkCanvasEditingMode.EraseByPoint : InkCanvasEditingMode.Ink;
+            InkCanvas_c.EditingMode = InkCanvas_c.EditingMode == InkCanvasEditingMode.Ink ? InkCanvasEditingMode.EraseByPoint : InkCanvasEditingMode.Ink;
+        }
+
+        private void Delete_btn_Click(object sender, RoutedEventArgs e)
+        {
+            if (con != null && con.State == ConnectionState.Closed)
+            {
+                con.Open();
+            }
+
+            
+            cmd = new SqlCommand("DELETE FROM FlashCards WHERE id="+ Int32.Parse(GlobalVariables.IdToEdit) + ";", con );
+            int i = cmd.ExecuteNonQuery();
+            if (i != 0)
+            {
+                MessageBox.Show("card deleted");
+                
+            }
+            else
+            {
+                MessageBox.Show("Error");
+            }
+        }
+
+        private void Promote_key_down(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Space) 
+            {
+                Demote.Focus();  
+            
+            }
+
         }
     }
 }
